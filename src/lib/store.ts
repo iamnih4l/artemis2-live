@@ -21,8 +21,8 @@ interface AppState {
   finishLaunch: () => void
 }
 
-// Launch in 15 seconds relative to when the app loads so we can test the sequence
-const ARTEMIS_2_LAUNCH = Date.now() + 15000
+// Launch target: April 1, 2026 at 6:24 p.m. EDT (22:24 UTC)
+const ARTEMIS_2_LAUNCH = new Date('2026-04-01T22:24:00Z').getTime()
 export const useAppStore = create<AppState>((set) => ({
   currentPhase: 'countdown',
   launchTimestamp: ARTEMIS_2_LAUNCH,

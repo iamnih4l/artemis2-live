@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 export default function CountdownScreen() {
   const { launchTimestamp, setPhase } = useAppStore()
-  const [timeLeft, setTimeLeft] = useState<{ h: number; m: number; s: number } | null>(null)
+  const [timeLeft, setTimeLeft] = useState<{ d: number; h: number; m: number; s: number } | null>(null)
 
   useEffect(() => {
     const updateCountdown = () => {
@@ -14,11 +14,12 @@ export default function CountdownScreen() {
       const distance = launchTimestamp - now
 
       if (distance <= 0) {
-        setTimeLeft({ h: 0, m: 0, s: 0 })
+        setTimeLeft({ d: 0, h: 0, m: 0, s: 0 })
         return
       }
 
       setTimeLeft({
+        d: Math.floor(distance / (1000 * 60 * 60 * 24)),
         h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
         m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
         s: Math.floor((distance % (1000 * 60)) / 1000),
@@ -60,6 +61,15 @@ export default function CountdownScreen() {
           className="flex gap-4 md:gap-8 items-center font-bold font-mono glow-text text-5xl md:text-8xl tracking-widest text-white"
         >
           <span className="text-[#00D1FF]">T -</span>
+          {timeLeft.d > 0 && (
+            <>
+              <div className="flex flex-col items-center">
+                <span>{String(timeLeft.d).padStart(2, '0')}</span>
+                <span className="text-xs font-sans text-white/40 tracking-widest mt-2 font-normal">DAYS</span>
+              </div>
+              <span className="text-white/30">:</span>
+            </>
+          )}
           <div className="flex flex-col items-center">
             <span>{String(timeLeft.h).padStart(2, '0')}</span>
             <span className="text-xs font-sans text-white/40 tracking-widest mt-2 font-normal">HRS</span>
@@ -81,7 +91,7 @@ export default function CountdownScreen() {
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.5 }}
           onClick={() => setPhase('live')}
-          disabled={timeLeft.h > 0 || timeLeft.m > 0 || timeLeft.s > 0}
+          disabled={timeLeft.d > 0 || timeLeft.h > 0 || timeLeft.m > 0 || timeLeft.s > 0}
           className="mt-16 px-10 py-4 rounded-full border border-white/20 glass text-white tracking-widest text-sm hover:bg-white/10 hover:border-[#00D1FF]/50 transition-all duration-500 disabled:opacity-30 disabled:cursor-not-allowed group overflow-hidden relative"
         >
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out" />
