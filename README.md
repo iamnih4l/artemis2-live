@@ -1,6 +1,9 @@
 <div align="center">
   <img src="src/app/icon.png" alt="Artemis Logo" width="100"/>
   <h1>🚀 ARTEMIS II LIVE</h1>
+  <a href="https://artemis2-live.vercel.app/">
+    <img src="https://img.shields.io/badge/Live_Simulation-black?style=for-the-badge&logo=vercel" alt="Vercel Deployment" />
+  </a>
   <p><b>Experience Humanity’s Return to the Moon natively in your browser.</b></p>
   <i>"We go not just to visit, but to stay."</i>
 </div>
