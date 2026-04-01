@@ -45,14 +45,24 @@ export default function CountdownScreen() {
 
       {/* Content */}
       <div className="z-10 flex flex-col items-center gap-8 mt-20">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5 }}
-          className="text-white/60 tracking-[0.5em] text-sm md:text-base uppercase"
-        >
-          Artemis II launches in...
-        </motion.p>
+        <div className="flex flex-col items-center gap-2">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+            className="text-white/60 tracking-[0.5em] text-sm md:text-base uppercase text-center"
+          >
+            Artemis II launches in...
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.7 }}
+            className="text-[#00D1FF]/80 tracking-widest text-xs md:text-sm uppercase text-center max-w-xl leading-relaxed"
+          >
+            Taking off from Florida at 6:24 p.m. EDT on Wednesday, April 1.
+          </motion.p>
+        </div>
         
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}

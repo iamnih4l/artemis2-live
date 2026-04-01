@@ -186,10 +186,10 @@ export default function LaunchSequence() {
   useEffect(() => {
     // Hide text early
     const t1 = setTimeout(() => setShowText(false), 2000)
-    // End the cinematic and unmount from overlay after ~9 seconds
+    // End the cinematic and unmount from overlay immediately after takeoff animation
     const t2 = setTimeout(() => {
       finishLaunch()
-    }, 9000) 
+    }, 4500) 
     
     return () => {
       clearTimeout(t1)
