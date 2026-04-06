@@ -12,8 +12,8 @@ export default function VideoPanel() {
       <div className="flex-1 relative w-full mt-2 rounded-lg overflow-hidden bg-black">
         <iframe 
           className="absolute inset-0 w-full h-full pointer-events-auto"
-          src="https://www.youtube.com/embed/live_stream?channel=UCLA_DiR1FfKNvjuUpBHmylQ&autoplay=1&mute=1" 
-          title="NASA Live Stream" 
+          src="https://www.youtube.com/embed/6RwfNBtepa4?si=CY9hSknv4Ky_-0jT&autoplay=1&mute=1" 
+          title="YouTube video player" 
           frameBorder="0" 
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
           referrerPolicy="strict-origin-when-cross-origin" 
