@@ -13,12 +13,10 @@ interface AppState {
   currentPhase: AppPhase
   launchTimestamp: number
   hasLaunched: boolean
-  showLaunchOverlay: boolean
   telemetry: TelemetryData
   setPhase: (phase: AppPhase) => void
   updateTelemetry: (data: Partial<TelemetryData>) => void
   triggerLaunch: () => void
-  finishLaunch: () => void
 }
 
 // Launch target: April 1, 2026 at 6:24 p.m. EDT (22:24 UTC)
@@ -27,7 +25,6 @@ export const useAppStore = create<AppState>((set) => ({
   currentPhase: 'countdown',
   launchTimestamp: ARTEMIS_2_LAUNCH,
   hasLaunched: false,
-  showLaunchOverlay: false,
   telemetry: {
     velocity: 0,
     distanceEarth: 0,
@@ -37,6 +34,5 @@ export const useAppStore = create<AppState>((set) => ({
   setPhase: (phase) => set({ currentPhase: phase }),
   updateTelemetry: (data) =>
     set((state) => ({ telemetry: { ...state.telemetry, ...data } })),
-  triggerLaunch: () => set({ hasLaunched: true, showLaunchOverlay: true, currentPhase: 'live' }),
-  finishLaunch: () => set({ showLaunchOverlay: false }),
+  triggerLaunch: () => set({ hasLaunched: true, currentPhase: 'live' }),
 }))

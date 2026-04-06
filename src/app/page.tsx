@@ -3,14 +3,12 @@
 import { useAppStore } from '@/lib/store'
 import { useTelemetry } from '@/hooks/useTelemetry'
 import CountdownScreen from '@/components/CountdownScreen'
-import LaunchSequence from '@/components/LaunchSequence'
 import LiveDashboard from '@/components/LiveDashboard'
 import HistoryOverlay from '@/components/HistoryOverlay'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export default function Home() {
   const currentPhase = useAppStore((state) => state.currentPhase)
-  const showLaunchOverlay = useAppStore((state) => state.showLaunchOverlay)
   
   useTelemetry()
 
@@ -60,22 +58,6 @@ export default function Home() {
             className="absolute inset-0 z-50"
           >
             <HistoryOverlay />
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* T-0 Cinematic Overlay Layer */}
-      <AnimatePresence>
-        {showLaunchOverlay && (
-          <motion.div
-            key="launch-overlay"
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
-            className="fixed inset-0 z-[100] bg-black"
-          >
-            <LaunchSequence />
           </motion.div>
         )}
       </AnimatePresence>

@@ -29,17 +29,36 @@ export function useTelemetry() {
       const t = secondsSinceLaunch
 
       if (t > 0) {
-        if (t < 3600) {
-          velocity = 28000 + (t / 3600) * 100;
-          distEarth = 400 + (t / 3600) * 100;
-        } else if (t < 7200) {
-          velocity = 28000 + ((t - 3600) / 3600) * 11500;
-          distEarth = 500 + ((t - 3600) / 3600) * 500;
+        if (t <= 120) {
+          // Liftoff to SRB Jettison (0 to 2 mins)
+          // Speed to ~ 6000 km/h, Alt to ~ 45 km
+          velocity = (t / 120) * 6000;
+          distEarth = (t / 120) * 45;
+        } else if (t <= 510) {
+          // SRB Jettison to MECO (2 mins to 8.5 mins)
+          // Speed to ~ 28000 km/h, Alt to ~ 160 km
+          velocity = 6000 + ((t - 120) / 390) * 22000;
+          distEarth = 45 + ((t - 120) / 390) * 115;
+        } else if (t <= 5400) {
+          // Earth Orbit (8.5 mins to 1.5 hours)
+          // Speed ~ 28000 km/h (slowly fluctuating), Alt ~ 160 to 400 km
+          velocity = 28000 + Math.sin(t / 100) * 50; 
+          distEarth = 160 + ((t - 510) / 4890) * 240;
+        } else if (t <= 6600) {
+          // Trans-Lunar Injection (TLI) burn (1.5h to 1.83h)
+          // Speed increases to 39500 km/h
+          velocity = 28000 + ((t - 5400) / 1200) * 11500;
+          distEarth = 400 + ((t - 5400) / 1200) * 600;
         } else {
-          const coastProgress = Math.min(1, (t - 7200) / 345600)
+          // Coast to Moon (up to 4 days)
+          // Speed drops from 39500 to ~ 3000 km/h
+          // Distance goes from 1000 to ~ 384400
+          const coastTime = Math.min(t - 6600, 345600); // capped at 4 days
+          const coastProgress = coastTime / 345600;
+          
           velocity = Math.max(3000, 39500 - (coastProgress * 36500));
-          distEarth = 1000 + (coastProgress * 380000);
-          distMoon = 384400 - distEarth;
+          distEarth = 1000 + (coastProgress * 383400);
+          distMoon = Math.max(0, 384400 - distEarth);
         }
       }
 

@@ -60,7 +60,7 @@ export default function CountdownScreen() {
             transition={{ duration: 1, delay: 0.7 }}
             className="text-[#00D1FF]/80 tracking-widest text-xs md:text-sm uppercase text-center max-w-xl leading-relaxed"
           >
-            Taking off from Florida at 6:24 p.m. EDT on Wednesday, April 1.
+            The launch will take place at Florida at 6:24 p.m. EDT on Wednesday, April 1.
           </motion.p>
         </div>
         
